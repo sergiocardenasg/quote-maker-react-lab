@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-
 import { addQuote } from '../actions/quotes';
 
 class QuoteForm extends Component {
@@ -20,7 +19,8 @@ class QuoteForm extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    //this.props.addQuote(this.state)
+    const quote = {...this.state, id: uuid() };
+    this.props.addQuote(quote);
     this.setState({
       content: '',
       author: ''
@@ -74,4 +74,4 @@ class QuoteForm extends Component {
 }
 
 //add arguments to connect as needed
-export default connect()(QuoteForm);
+export default connect(null, { addQuote })(QuoteForm);
